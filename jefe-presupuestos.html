@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuestos - Jefe de Proyecto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="tailwind-config.js"></script>
+
+</head>
+
+<body class="bg-background text-foreground">
+
+    <div class="min-h-screen flex w-full">
+        <!-- Sidebar -->
+        <aside id="app-sidebar"
+            class="relative transition-[width] duration-300 hidden lg:flex flex-col w-64 h-screen sticky top-0 bg-primary text-primary-foreground">
+            <div class="h-16 flex items-center px-6 border-b border-primary-foreground/10">
+                <span
+                    class="text-3xl font-extrabold tracking-tight sidebar-title overflow-hidden whitespace-nowrap">ACCU</span>
+            </div>
+            <!-- Toggle Button -->
+            <button id="sidebar-toggle" onclick="toggleSidebar()"
+                class="absolute -right-3 top-20 h-6 w-6 rounded-full bg-accent text-accent-foreground hover:bg-accent/80 shadow-md flex items-center justify-center transition-colors z-50 cursor-pointer border border-border">
+                <i data-lucide="chevron-left" class="h-4 w-4"></i>
+            </button>
+            <div class="flex-1 py-4 flex flex-col gap-1 px-3">
+                <div class="px-3 mb-2 text-xs font-semibold text-primary-foreground/70 uppercase tracking-wider">Menú
+                    Principal</div>
+                <a href="dashboard-jefe.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 ">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Dashboard
+                    </span></a>
+                <a href="jefe-proyectos.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 ">
+                    <i data-lucide="folder-kanban" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Proyectos
+                    </span></a>
+
+                <a href="jefe-presupuestos.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg bg-accent text-accent-foreground font-medium">
+                    <i data-lucide="calculator" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Presupuestos
+                    </span></a>
+                <a href="jefe-equipo.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 ">
+                    <i data-lucide="users" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Equipo
+                    </span></a>
+                <a href="jefe-avisos.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 ">
+                    <i data-lucide="bell" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Avisos
+                    </span></a>
+
+                <div class="mt-auto pt-4 border-t border-primary-foreground/10">
+                    <a href="index.html"
+                        class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-destructive-foreground hover:bg-destructive/20">
+                        <i data-lucide="log-out" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                            Cerrar Sesión
+                        </span></a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header -->
+            <header
+                class="h-16 bg-card border-b border-border flex items-center justify-between px-6 gap-4 sticky top-0 z-10">
+                <div class="relative flex-1 max-w-md hidden md:flex">
+                    <i data-lucide="search"
+                        class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"></i>
+                    <input type="text" placeholder="Buscar presupuestos..."
+                        class="flex h-10 w-full rounded-md border border-input bg-muted/50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 pl-10 border-0">
+                </div>
+                <!-- Mobile Menu Button (kept from original logic) -->
+                <button class="lg:hidden p-2 rounded-md hover:bg-accent hover:text-accent-foreground">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+
+                <div class="flex items-center gap-4 ml-auto lg:ml-0">
+                    <button
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 relative">
+                        <i data-lucide="bell" class="h-5 w-5"></i>
+                        <span
+                            class="absolute -top-1 -right-1 h-4 w-4 bg-destructive text-destructive-foreground text-xs rounded-full flex items-center justify-center">3</span>
+                    </button>
+
+                    <div class="flex items-center gap-2">
+                        <button
+                            class="inline-flex items-center gap-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md transition-colors">
+                            <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full">
+                                <span
+                                    class="flex h-full w-full items-center justify-center rounded-full bg-accent text-accent-foreground font-medium">
+                                    CM
+                                </span>
+                            </span>
+                            <span class="hidden md:inline text-sm font-medium">Carlos Mendoza</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="flex-1 p-6 lg:p-8 overflow-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold tracking-tight text-foreground">Gestión de Presupuestos</h1>
+                        <p class="text-muted-foreground mt-1">Revisión y aprobación de partidas presupuestales</p>
+                    </div>
+                </div>
+
+                <div class="bg-card rounded-lg border shadow-sm p-6">
+                    <div class="space-y-4" id="budget-full-list">
+                        <!-- Injected -->
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+        const budgets = [
+            { id: "PPTO-001", proyecto: "Torre Residencial - Etapa 1", total: 154000, estado: "Pendiente", color: "text-blue-600 bg-blue-50" },
+            { id: "PPTO-002", proyecto: "Mall Centro - Acabados", total: 85000, estado: "Aprobado", color: "text-green-700 bg-green-50" },
+            { id: "PPTO-003", proyecto: "Remodelación Oficinas Norte", total: 42500, estado: "Revisión", color: "text-orange-600 bg-orange-50" },
+            { id: "PPTO-004", proyecto: "Infraestructura Vial Sur", total: 320000, estado: "Pendiente", color: "text-blue-600 bg-blue-50" },
+            { id: "PPTO-005", proyecto: "Mantenimiento General", total: 15000, estado: "Aprobado", color: "text-green-700 bg-green-50" },
+        ];
+
+        const container = document.getElementById('budget-full-list');
+        if (container) {
+            budgets.forEach(b => {
+                const item = document.createElement('div');
+                item.className = "flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors";
+                item.innerHTML = `
+                    <div class="flex items-start gap-4">
+                         <div class="mt-1 p-2 bg-muted rounded-full">
+                            <i data-lucide="file-text" class="w-5 h-5 text-gray-500"></i>
+                         </div>
+                         <div>
+                            <h4 class="font-medium text-foreground">${b.proyecto}</h4>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-xs font-mono text-muted-foreground">${b.id}</span>
+                                <span class="text-xs text-muted-foreground">|</span>
+                                <span class="text-sm font-semibold text-gray-700">S/ ${b.total.toLocaleString()}</span>
+                            </div>
+                         </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${b.color}">
+                            ${b.estado}
+                        </span>
+                        <div class="flex gap-1">
+                             <button class="p-2 hover:bg-gray-100 rounded-full text-gray-500" title="Ver Detalles">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                             </button>
+                             <button class="p-2 hover:bg-gray-100 rounded-full text-green-600" title="Aprobar">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                             </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

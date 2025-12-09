@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiales - Operativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="tailwind-config.js"></script>
+
+</head>
+
+<body class="bg-background text-foreground">
+
+    <div class="min-h-screen flex w-full">
+        <!-- Sidebar -->
+        <aside id="app-sidebar"
+            class="relative transition-[width] duration-300 hidden lg:flex flex-col w-64 h-screen sticky top-0 bg-primary text-primary-foreground">
+            <div class="h-16 flex items-center px-6 border-b border-primary-foreground/10">
+                <span
+                    class="text-3xl font-extrabold tracking-tight sidebar-title overflow-hidden whitespace-nowrap">ACCU</span>
+            </div>
+            <!-- Toggle Button -->
+            <button id="sidebar-toggle" onclick="toggleSidebar()"
+                class="absolute -right-3 top-20 h-6 w-6 rounded-full bg-accent text-accent-foreground hover:bg-accent/80 shadow-md flex items-center justify-center transition-colors z-50 cursor-pointer border border-border">
+                <i data-lucide="chevron-left" class="h-4 w-4"></i>
+            </button>
+            <div class="flex-1 py-4 flex flex-col gap-1 px-3">
+                <div class="px-3 mb-2 text-xs font-semibold text-primary-foreground/70 uppercase tracking-wider">Menú
+                    Principal</div>
+                <a href="dashboard-operativo.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 ">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Dashboard
+                    </span></a>
+                <a href="operativo-presupuestos.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 ">
+                    <i data-lucide="file-spreadsheet" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Presupuestos
+                    </span></a>
+                <a href="operativo-materiales.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg bg-accent text-accent-foreground font-medium">
+                    <i data-lucide="package" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Materiales
+                    </span></a>
+                <a href="operativo-mano-obra.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 ">
+                    <i data-lucide="hammer" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Mano de Obra
+                    </span></a>
+                <a href="operativo-reportes.html"
+                    class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 ">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                        Reportes
+                    </span></a>
+
+                <div class="mt-auto pt-4 border-t border-primary-foreground/10">
+                    <a href="index.html"
+                        class="flex items-center gap-3 px-3 py-2.5 font-medium rounded-lg text-destructive-foreground hover:bg-destructive/20">
+                        <i data-lucide="log-out" class="w-4 h-4"></i><span class="sidebar-text truncate">
+                            Cerrar Sesión
+                        </span></a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header -->
+            <header
+                class="h-16 bg-card border-b border-border flex items-center justify-between px-6 gap-4 sticky top-0 z-10">
+                <div class="relative flex-1 max-w-md hidden md:flex">
+                    <i data-lucide="search"
+                        class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"></i>
+                    <input type="text" placeholder="Buscar documentos, proyectos..."
+                        class="flex h-10 w-full rounded-md border border-input bg-muted/50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 pl-10 border-0">
+                </div>
+                <!-- Mobile Menu Button (kept from original logic) -->
+                <button class="lg:hidden p-2 rounded-md hover:bg-accent hover:text-accent-foreground">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+
+                <div class="flex items-center gap-4 ml-auto lg:ml-0">
+                    <button
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 relative">
+                        <i data-lucide="bell" class="h-5 w-5"></i>
+                        <span
+                            class="absolute -top-1 -right-1 h-4 w-4 bg-destructive text-destructive-foreground text-xs rounded-full flex items-center justify-center">3</span>
+                    </button>
+
+                    <div class="flex items-center gap-2">
+                        <button
+                            class="inline-flex items-center gap-2 hover:bg-accent hover:text-accent-foreground p-2 rounded-md transition-colors">
+                            <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full">
+                                <span
+                                    class="flex h-full w-full items-center justify-center rounded-full bg-accent text-accent-foreground font-medium">
+                                    AR
+                                </span>
+                            </span>
+                            <span class="hidden md:inline text-sm font-medium">Ana Rodríguez</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="flex-1 p-6 lg:p-8 overflow-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold tracking-tight text-foreground">Inventario de Materiales</h1>
+                        <p class="text-muted-foreground mt-1">Gestión de stock y proveedores</p>
+                    </div>
+                    <button
+                        class="inline-flex items-center justify-center rounded-lg text-sm font-medium bg-black text-primary-foreground h-10 px-4 py-2 gap-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        Agregar Material
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="materials-grid">
+                    <!-- Injected -->
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+        const materiales = [
+            { nombre: "Cemento Portalnd 42.5", cantidad: 1200, um: "Bolsas", precio: "$4.500", categoria: "Obra Gruesa", icon: "box" },
+            { nombre: "Acero de Refuerzo 12mm", cantidad: 500, um: "Varillas", precio: "$8.900", categoria: "Estructuras", icon: "layers" },
+            { nombre: "Ladrillo Fiscal", cantidad: 15000, um: "Unidades", precio: "$320", categoria: "Albañilería", icon: "align-justify" },
+            { nombre: "Pintura Látex blanco", cantidad: 45, um: "Tinetas", precio: "$45.000", categoria: "Terminaciones", icon: "droplet" },
+            { nombre: "Cerámica Piso 60x60", cantidad: 350, um: "m2", precio: "$12.990", categoria: "Pisos", icon: "grid" },
+            { nombre: "Yeso Cartón 10mm", cantidad: 200, um: "Planchas", precio: "$6.500", categoria: "Tabiquería", icon: "layout" },
+        ];
+
+        const grid = document.getElementById('materials-grid');
+        if (grid) {
+            materiales.forEach(m => {
+                const card = document.createElement('div');
+                card.className = "rounded-lg border bg-card p-6 shadow-sm hover:shadow-md transition-all";
+                card.innerHTML = `
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                             <div class="p-2 bg-muted rounded-lg text-muted-foreground">
+                                <i data-lucide="${m.icon}" class="w-6 h-6"></i>
+                            </div>
+                            <span class="text-xs font-semibold px-2 py-1 rounded-full bg-muted text-muted-foreground self-center">${m.categoria}</span>
+                        </div>
+                        
+                        <div class="relative group">
+                            <button class="h-8 w-8 flex items-center justify-center hover:bg-accent hover:text-accent-foreground rounded-full text-muted-foreground transition-colors">
+                                <i data-lucide="more-vertical" class="w-4 h-4"></i>
+                            </button>
+                            <div class="absolute right-0 top-8 w-40 bg-popover text-popover-foreground border rounded-md shadow-lg z-10 hidden group-hover:block hover:block">
+                                <button class="w-full text-left px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground transition-colors">Editar</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="font-bold text-lg mb-1">${m.nombre}</h3>
+                    
+                    <div class="space-y-2 mt-4">
+                         <div class="flex justify-between text-sm border-b border-border/50 pb-2">
+                            <span class="text-muted-foreground">Stock Actual</span>
+                            <span class="font-medium">${m.cantidad.toLocaleString()}</span>
+                        </div>
+                        <div class="flex justify-between text-sm border-b border-border/50 pb-2">
+                            <span class="text-muted-foreground">Unidad (UM)</span>
+                            <span class="font-medium">${m.um}</span>
+                        </div>
+                        <div class="flex justify-between text-sm pt-1">
+                            <span class="text-muted-foreground">Precio Unitario</span>
+                            <span class="font-medium">${m.precio}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
